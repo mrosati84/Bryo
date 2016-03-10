@@ -5,8 +5,10 @@
   apt: name=php5-fpm state=present
 - name: install php5 Mcrypt extension
   apt: name=php5-mcrypt state=present
+- name: install XDebug
+  apt: name=php5-xdebug state=present
 
-- name: Set-up php5 fpm
+- name: set-up php5 fpm
   template:
     src=etc/php5/fpm/php.ini.j2
     dest=/etc/php5/fpm/php.ini

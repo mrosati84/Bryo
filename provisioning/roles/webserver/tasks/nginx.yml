@@ -2,7 +2,7 @@
 - name: install Nginx
   apt: name=nginx state=present
 
-- name: Set-up Nginx virtual host
+- name: set-up Nginx virtual host
   template:
     src=etc/nginx/sites-available/default.j2
     dest=/etc/nginx/sites-available/default
