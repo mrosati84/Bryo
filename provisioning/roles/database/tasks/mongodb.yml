@@ -1,0 +1,5 @@
+---
+- name: install MongoDB
+  apt: name=mongodb state=present
+- name: install php5 MongoDB driver
+  apt: name=php5-mongo state=present

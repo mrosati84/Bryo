@@ -1,0 +1,14 @@
+---
+- name: install php5 CLI
+  apt: name=php5-cli state=present
+- name: install php5 fpm
+  apt: name=php5-fpm state=present
+- name: install php5 Mcrypt extension
+  apt: name=php5-mcrypt state=present
+
+- name: Set-up php5 fpm
+  template:
+    src=etc/php5/fpm/php.ini.j2
+    dest=/etc/php5/fpm/php.ini
+- name: reload php5 fpm
+  service: name=php5-fpm state=reloaded

@@ -1,0 +1,14 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    server_name: localhost
+
+  pre_tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+
+  roles:
+    - webserver
+    - database
+    - git
