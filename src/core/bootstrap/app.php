@@ -50,6 +50,12 @@ $app->singleton(
     Bryo\Console\Kernel::class
 );
 
+// Register binding for database implementation.
+// We will use MongoDB as a default implementation but
+// we want to be flexible and provide other implementations
+// in the future.
+$app->bind('Bryo\Database\Contracts\Database', 'Bryo\Database\MongoDatabase');
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
