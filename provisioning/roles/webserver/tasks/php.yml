@@ -5,16 +5,41 @@
   apt: name=php5-fpm state=present
 - name: install php5 Mcrypt extension
   apt: name=php5-mcrypt state=present
+- name: install PECL
+  apt: name=php-pear state=present
+- name: install php5 dev
+  apt: name=php5-dev state=present
 - name: install XDebug
   apt: name=php5-xdebug state=present
 
+# Installation dependencies for mongodb
+- name: install libcurl4-openssl-dev
+  apt: name=libcurl4-openssl-dev state=present
+- name: install pkg-config
+  apt: name=pkg-config state=present
+- name: install libssl-dev
+  apt: name=libssl-dev state=present
+- name: install libsslcommon2-dev
+  apt: name=libsslcommon2-dev state=present
+- name: install libpcre++-dev
+  apt: name=libpcre++-dev state=present
+- name: install pecl/mongodb
+  pear: name=pecl/mongodb state=present
+
+# Files set-up
 - name: set-up php5 fpm
   template:
     src=etc/php5/fpm/php.ini.j2
     dest=/etc/php5/fpm/php.ini
+- name: set-up php5 cli
+  template:
+    src=etc/php5/cli/php.ini.j2
+    dest=/etc/php5/cli/php.ini
 - name: configure php5 fpm www pool
   template:
     src=etc/php5/fpm/pool.d/www.conf.j2
     dest=/etc/php5/fpm/pool.d/www.conf
+
+# Reload the php-fpm service
 - name: reload php5 fpm
   service: name=php5-fpm state=reloaded
