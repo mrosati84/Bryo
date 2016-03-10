@@ -12,5 +12,9 @@
   template:
     src=etc/php5/fpm/php.ini.j2
     dest=/etc/php5/fpm/php.ini
+- name: configure php5 fpm www pool
+  template:
+    src=etc/php5/fpm/pool.d/www.conf.j2
+    dest=/etc/php5/fpm/pool.d/www.conf
 - name: reload php5 fpm
   service: name=php5-fpm state=reloaded
