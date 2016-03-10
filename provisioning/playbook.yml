@@ -1,6 +1,9 @@
 ---
 - hosts: all
-  sudo: true
+
+  become: yes
+  become_method: sudo
+
   vars:
     server_name: localhost
 
