@@ -10,4 +10,4 @@
 
 # Reload service.
 - name: reload Nginx
-  service: name=nginx state=reloaded
+  service: name=nginx state=restarted
