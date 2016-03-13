@@ -11,6 +11,18 @@ server {
          try_files $uri $uri/ /index.php$is_args$args;
     }
 
+    location /admin/css {
+        alias /vagrant/src/core/resources/assets/css;
+    }
+
+    location /admin/img {
+        alias /vagrant/src/core/resources/assets/img;
+    }
+
+    location /admin/js {
+        alias /vagrant/src/core/resources/assets/js;
+    }
+
     location ~ \.php$ {
         try_files $uri /index.php =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
