@@ -14,3 +14,13 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->get('admin', [
+    'as' => 'admin.index',
+    'uses' => 'Admin\BryoAdminController@index'
+]);
+
+$app->get('admin/content/{type}', [
+    'as' => 'admin.list',
+    'uses' => 'Admin\BryoAdminController@listContent'
+]);

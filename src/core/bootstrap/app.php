@@ -7,7 +7,7 @@ try {
     // from the user app directory.
     (new Dotenv\Dotenv(__DIR__.'/../../user/'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
-    //
+    // Handle invalid configuration path.
 }
 
 /*
@@ -24,10 +24,6 @@ try {
 $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
-
-// $app->withFacades();
-
-// $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +46,8 @@ $app->singleton(
     Bryo\Console\Kernel::class
 );
 
-$app->bind('MongoDB\Database', function () {
+// Make database connection a singleton.
+$app->singleton(MongoDB\Database::class, function () {
     $client = new MongoDB\Client(getenv('DB_URI'));
     return $client->selectDatabase(getenv('DB_NAME'));
 });
@@ -107,5 +104,16 @@ $app->group(['namespace' => 'Bryo\Http\Controllers'], function ($app) {
 $app->group([], function ($app) {
     require __DIR__.'/../../user/code/routes.php';
 });
+
+/*
+|--------------------------------------------------------------------------
+| Other adjustments
+|--------------------------------------------------------------------------
+|
+| Here we add a new directory where to look for views.
+|
+*/
+
+$app['view']->addLocation(__DIR__.'/../../user/code/resources/views');
 
 return $app;

@@ -1,0 +1,69 @@
+---
+user: &user
+  labels:
+    singular: User
+    plural: Users
+  fields:
+    email:
+      type: email
+      required: true
+    password:
+      type: string
+      required: true
+      hidden: true
+    bio:
+      type: text
+
+tag: &tag
+  labels:
+    singular: Tag
+    plural: Tags
+  fields:
+    name:
+      type: string
+      required: true
+    kind:
+      type: string
+      required: true
+
+page:
+  labels:
+    singular: Page
+    plural: Pages
+  fields:
+    title:
+      type: string
+      required: true
+    body:
+      type: text
+      required: true
+
+report:
+  labels:
+    singular: Report
+    plural: Reports
+  fields:
+    title:
+      type: string
+      required: true
+    body:
+      type: text
+      required: true
+
+article:
+  labels:
+    singular: Article
+    plural: Articles
+  fields:
+    author:
+      type: reference
+      reference: *user
+    title:
+      type: string
+      required: true
+    body:
+      type: text
+    tags:
+      type: reference
+      reference: *tag
+      cardinality: -1
